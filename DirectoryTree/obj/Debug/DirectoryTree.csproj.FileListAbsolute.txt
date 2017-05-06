@@ -1,0 +1,5 @@
+e:\users\micha\documents\visual studio 2015\Projects\DirectoryTree\DirectoryTree\bin\Debug\DirectoryTree.dll
+e:\users\micha\documents\visual studio 2015\Projects\DirectoryTree\DirectoryTree\bin\Debug\DirectoryTree.pdb
+e:\users\micha\documents\visual studio 2015\Projects\DirectoryTree\DirectoryTree\obj\Debug\DirectoryTree.csprojResolveAssemblyReference.cache
+e:\users\micha\documents\visual studio 2015\Projects\DirectoryTree\DirectoryTree\obj\Debug\DirectoryTree.dll
+e:\users\micha\documents\visual studio 2015\Projects\DirectoryTree\DirectoryTree\obj\Debug\DirectoryTree.pdb
