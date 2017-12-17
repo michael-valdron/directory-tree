@@ -77,7 +77,7 @@ namespace DirectoryTree
 
         public DirectoryInfo findParentNode(DirectoryInfo currDir, TreeNode tarNode)
         {
-            if (currDir.Name.Equals(tarNode.Text))
+            if (currDir.FullName.Replace("\\", "").Equals(tarNode.FullPath.Replace("\\", "")))
             {
                 return currDir;
             }
