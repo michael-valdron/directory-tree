@@ -29,33 +29,38 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DirectoryTree));
             this.tvDirView = new System.Windows.Forms.TreeView();
             this.imglstDirIco = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // tvDirView
             // 
-            this.tvDirView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tvDirView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvDirView.ImageIndex = 0;
+            this.tvDirView.ImageList = this.imglstDirIco;
             this.tvDirView.Location = new System.Drawing.Point(0, 0);
+            this.tvDirView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tvDirView.Name = "tvDirView";
-            this.tvDirView.Size = new System.Drawing.Size(354, 481);
+            this.tvDirView.SelectedImageIndex = 0;
+            this.tvDirView.Size = new System.Drawing.Size(443, 390);
             this.tvDirView.TabIndex = 2;
+            this.tvDirView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvDirView_AfterSelect);
             // 
             // imglstDirIco
             // 
-            this.imglstDirIco.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imglstDirIco.ImageSize = new System.Drawing.Size(16, 16);
+            this.imglstDirIco.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imglstDirIco.ImageStream")));
             this.imglstDirIco.TransparentColor = System.Drawing.Color.Transparent;
+            this.imglstDirIco.Images.SetKeyName(0, "directory-98516_1280.png");
             // 
             // DirectoryTree
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tvDirView);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "DirectoryTree";
-            this.Size = new System.Drawing.Size(354, 481);
+            this.Size = new System.Drawing.Size(443, 390);
             this.ResumeLayout(false);
 
         }

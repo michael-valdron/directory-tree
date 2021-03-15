@@ -9,23 +9,61 @@
 
 using System.Windows.Forms;
 using System.IO;
+using System.Collections.Generic;
+using System;
 
 namespace DirectoryTree
 {
     public partial class DirectoryTree : UserControl
     {
-        private TreeNode currNode;
+        private string prevDir;
+        private DirectoryInfo selDir;
+        private bool initialized;
 
         public DirectoryTree()
         {
             InitializeComponent();
+            prevDir = null;
+            selDir = null;
+            initialized = false;
         }
 
-        public TreeView Tree
+        public string Path
         {
-            get
+            get => (selDir != null) ? selDir.FullName : "";
+            set
             {
-                return tvDirView;
+                try
+                {
+                    if (value != null && Directory.Exists(value))
+                    {
+                        if (selDir != null)
+                            prevDir = selDir.FullName;
+                        selDir = new DirectoryInfo(value);
+                        RemoveNodes();
+                        BuildDir();
+                    }
+                    else
+                    {
+                        if (selDir != null)
+                            prevDir = selDir.FullName;
+                        selDir = null;
+                    }
+                }
+                catch (UnauthorizedAccessException e)
+                {
+                    MessageBox.Show(e.Message, "Access Denied.", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (prevDir != null)
+                        Path = prevDir;
+                }
+                catch (IOException e)
+                {
+                    MessageBox.Show(e.Message, "IO Error.",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (prevDir != null)
+                        Path = prevDir;
+                }
             }
         }
 
@@ -33,85 +71,79 @@ namespace DirectoryTree
         {
             get
             {
-                return currNode;
-            }
-            set
-            {
-                currNode = value;
+                return tvDirView.SelectedNode;
             }
         }
 
-        public TreeNode buildDir(DirectoryInfo dirInfo)
+        private void BuildDir()
         {
-            TreeNode topNode;
+            TreeNode selNode = new TreeNode(selDir.Name);
+            TreeNode root = BuildParents(ref selNode);
 
-            topNode = buildDirParents(dirInfo, tvDirView.Nodes);
+            BuildChildren(ref selNode);
 
-            buildSubDirs(dirInfo, topNode.Nodes);
-
-            return topNode;
+            tvDirView.Nodes.Add(root);
+            tvDirView.SelectedNode = selNode;
         }
 
-        private TreeNode buildDirParents(DirectoryInfo dirInfo, TreeNodeCollection tree)
+        private TreeNode BuildParents(ref TreeNode bottom)
         {
-            TreeNode selNode;
+            Stack<TreeNode> hierarchy = new Stack<TreeNode>();
+            var currDir = selDir;
 
-            if (dirInfo.FullName == dirInfo.Root.FullName)
+            while (currDir.Parent != null)
             {
-                return tree.Add(dirInfo.Name);
+                currDir = currDir.Parent;
+                hierarchy.Push(new TreeNode(currDir.Name));
+            }
+
+            if (hierarchy.Count == 0)
+            {
+                return bottom;
             }
             else
             {
-                selNode = buildDirParents(dirInfo.Parent, tree);
-                return selNode.Nodes.Add(dirInfo.Name);
-            }
-        }
+                var root = hierarchy.Pop();
+                var currNode = root;
 
-        private void buildSubDirs(DirectoryInfo dirInfo, TreeNodeCollection tree)
-        {
-            foreach (DirectoryInfo subDir in dirInfo.GetDirectories())
-            {
-                tree.Add(subDir.Name);
-            }
-        }
-
-        public DirectoryInfo findParentNode(DirectoryInfo currDir, TreeNode tarNode)
-        {
-            if (currDir.FullName.Replace("\\", "").Equals(tarNode.FullPath.Replace("\\", "")))
-            {
-                return currDir;
-            }
-            else if (currDir.Parent == null)
-            {
-                return null;
-            }
-            else
-            {
-                return findParentNode(currDir.Parent, tarNode);
-            }
-        }
-
-        public DirectoryInfo findChildNode(DirectoryInfo currDir, TreeNode tarNode)
-        {
-            DirectoryInfo result = null;
-
-            foreach (DirectoryInfo subDir in currDir.GetDirectories())
-            {
-                if (subDir.Name.Equals(tarNode.Text))
+                while (hierarchy.Count != 0)
                 {
-                    return subDir;
+                    var nextNode = hierarchy.Pop();
+                    currNode.Nodes.Add(nextNode);
+                    currNode = nextNode;
                 }
-            }
 
-            return result;
+                currNode.Nodes.Add(bottom);
+
+                return root;
+            }
         }
 
-        public void removeNodes()
+        private void BuildChildren(ref TreeNode root)
+        {
+            foreach (DirectoryInfo subDir in selDir.GetDirectories())
+            {
+                root.Nodes.Add(subDir.Name);
+            }
+        }
+
+        private void RemoveNodes()
         {
             foreach (TreeNode aNode in tvDirView.Nodes)
             {
                 aNode.Remove();
             }
+        }
+
+        private void tvDirView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (initialized)
+            {
+                initialized = false;
+                Path = tvDirView.SelectedNode.FullPath;
+            }
+            else
+                initialized = true;
         }
     }
 }

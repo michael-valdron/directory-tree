@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DirectoryTree")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Directory Tree control for .NET Windows Forms applications.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Michael Valdron")]
 [assembly: AssemblyProduct("DirectoryTree")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCopyright("Copyright © 2017 Michael Valdron")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
