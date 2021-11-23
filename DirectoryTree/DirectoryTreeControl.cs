@@ -72,15 +72,15 @@ namespace DirectoryTree
         private void BuildDir()
         {
             TreeNode selNode = new TreeNode(selDir.Name);
-            TreeNode root = BuildParents(ref selNode);
+            TreeNode root = BuildParents(selNode);
 
-            BuildChildren(ref selNode);
+            BuildChildren(selNode);
 
             tvDirView.Nodes.Add(root);
             tvDirView.SelectedNode = selNode;
         }
 
-        private TreeNode BuildParents(ref TreeNode bottom)
+        private TreeNode BuildParents(TreeNode bottom)
         {
             Stack<TreeNode> hierarchy = new Stack<TreeNode>();
             var currDir = selDir;
@@ -113,7 +113,7 @@ namespace DirectoryTree
             }
         }
 
-        private void BuildChildren(ref TreeNode root)
+        private void BuildChildren(TreeNode root)
         {
             foreach (DirectoryInfo subDir in selDir.GetDirectories())
             {
