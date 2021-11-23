@@ -67,13 +67,7 @@ namespace DirectoryTree
             }
         }
 
-        public TreeNode SelectedNode
-        {
-            get
-            {
-                return tvDirView.SelectedNode;
-            }
-        }
+        public TreeNode SelectedNode => tvDirView.SelectedNode;
 
         private void BuildDir()
         {
