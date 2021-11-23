@@ -135,7 +135,7 @@ namespace DirectoryTree
             }
         }
 
-        private void tvDirView_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TvDirView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (initialized)
             {

@@ -45,7 +45,7 @@
             this.tvDirView.SelectedImageIndex = 0;
             this.tvDirView.Size = new System.Drawing.Size(443, 390);
             this.tvDirView.TabIndex = 2;
-            this.tvDirView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvDirView_AfterSelect);
+            this.tvDirView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvDirView_AfterSelect);
             // 
             // imglstDirIco
             // 
