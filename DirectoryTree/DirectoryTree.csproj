@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DirectoryTree.cs">
+    <Compile Include="DirectoryTreeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DirectoryTree.Designer.cs">
-      <DependentUpon>DirectoryTree.cs</DependentUpon>
+    <Compile Include="DirectoryTreeControl.Designer.cs">
+      <DependentUpon>DirectoryTreeControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -63,8 +63,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DirectoryTree.resx">
-      <DependentUpon>DirectoryTree.cs</DependentUpon>
+    <EmbeddedResource Include="DirectoryTreeControl.resx">
+      <DependentUpon>DirectoryTreeControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
