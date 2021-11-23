@@ -28,7 +28,7 @@ namespace DirectoryTree
             initialized = false;
         }
 
-        public string Path
+        public string SelectedPath
         {
             get => (selDir != null) ? selDir.FullName : "";
             set
@@ -55,14 +55,14 @@ namespace DirectoryTree
                     MessageBox.Show(e.Message, "Access Denied.", 
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     if (prevDir != null)
-                        Path = prevDir;
+                        SelectedPath = prevDir;
                 }
                 catch (IOException e)
                 {
                     MessageBox.Show(e.Message, "IO Error.",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     if (prevDir != null)
-                        Path = prevDir;
+                        SelectedPath = prevDir;
                 }
             }
         }
@@ -71,7 +71,7 @@ namespace DirectoryTree
 
         private void BuildDir()
         {
-            TreeNode selNode = new TreeNode(selDir.Name);
+            TreeNode selNode = new TreeNode(DirectoryUtils.TrimPathSep(selDir.Name));
             TreeNode root = BuildParents(selNode);
 
             BuildChildren(selNode);
@@ -88,7 +88,7 @@ namespace DirectoryTree
             while (currDir.Parent != null)
             {
                 currDir = currDir.Parent;
-                hierarchy.Push(new TreeNode(currDir.Name));
+                hierarchy.Push(new TreeNode(DirectoryUtils.TrimPathSep(currDir.Name)));
             }
 
             if (hierarchy.Count == 0)
@@ -117,7 +117,7 @@ namespace DirectoryTree
         {
             foreach (DirectoryInfo subDir in selDir.GetDirectories())
             {
-                root.Nodes.Add(subDir.Name);
+                root.Nodes.Add(DirectoryUtils.TrimPathSep(subDir.Name));
             }
         }
 
@@ -134,7 +134,7 @@ namespace DirectoryTree
             if (initialized)
             {
                 initialized = false;
-                Path = tvDirView.SelectedNode.FullPath;
+                SelectedPath = tvDirView.SelectedNode.FullPath;
             }
             else
                 initialized = true;
