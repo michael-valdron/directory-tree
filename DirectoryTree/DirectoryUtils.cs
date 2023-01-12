@@ -1,4 +1,12 @@
-﻿using System.IO;
+﻿/* DirectoryTree
+ * =============
+ * 
+ * Author: Michael Valdron
+ * Build: 1.0
+ * Licence: MIT 
+ * Copyright (c) 2023 Michael Valdron
+ */
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace DirectoryTree
