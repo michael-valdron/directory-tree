@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Michael Valdron")]
 [assembly: AssemblyProduct("DirectoryTree")]
-[assembly: AssemblyCopyright("Copyright © 2017 Michael Valdron")]
+[assembly: AssemblyCopyright("Copyright © 2023 Michael Valdron")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
