@@ -4,7 +4,7 @@
  * Author: Michael Valdron
  * Build: 1.0
  * Licence: MIT 
- * Copyright (c) 2023 Michael Valdron
+ * Copyright (c) 2017-2023 Michael Valdron
  */
 
 using System.Windows.Forms;

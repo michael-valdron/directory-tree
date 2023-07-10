@@ -4,7 +4,7 @@
  * Author: Michael Valdron
  * Build: 1.0
  * Licence: MIT 
- * Copyright (c) 2023 Michael Valdron
+ * Copyright (c) 2021-2023 Michael Valdron
  */
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
