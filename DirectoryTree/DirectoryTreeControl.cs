@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections.Generic;
 using System;
+using System.ComponentModel;
 
 namespace DirectoryTree
 {
@@ -19,6 +20,18 @@ namespace DirectoryTree
         private string prevDir;
         private DirectoryInfo selDir;
         private bool initialized;
+
+        /// <summary>
+        /// Represents the method that will handle the events of a DirectoryTree.DirectoryTreeControl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void DirectoryTreeEventHandler(object sender, TreeViewEventArgs e);
+
+        [Browsable(true)]
+        [Category("Actions")]
+        [Description("Occurs when the directory selection has been changed.")]
+        public event DirectoryTreeEventHandler AfterSelect;
 
         public DirectoryTreeControl()
         {
@@ -135,6 +148,8 @@ namespace DirectoryTree
             {
                 initialized = false;
                 SelectedPath = tvDirView.SelectedNode.FullPath;
+
+                AfterSelect?.Invoke(this, e);
             }
             else
                 initialized = true;
